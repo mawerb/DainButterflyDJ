@@ -14,6 +14,7 @@ Once you have installed dependencies, from the src directory open three separate
 ```bash
 git clone https://github.com/mawerb/DainButterflyDJ.git
 ```
+Once in the project's directory
 ```bash
 cd src
 node server.js
