@@ -37,90 +37,76 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
-// Function to make the API call
-var generateSong = function (Prompt, Genre, Title) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, response, _a, code, responseData, taskId, durationSong, audioUrl, imageUrl, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                data = {
-                    prompt: "".concat(Prompt),
-                    style: "".concat(Genre),
-                    title: "".concat(Title),
-                    customMode: true,
-                    instrumental: false,
-                    model: "V3_5",
-                    callBackUrl: "https://api.example.com/callback",
-                };
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
-                // Log the data being sent to the API for debugging
-                console.log("Data being sent to the API:", data);
-                return [4 /*yield*/, axios_1.default.post("https://apibox.erweima.ai/api/v1/generate", data, {
+function generateSong() {
+    return __awaiter(this, void 0, void 0, function () {
+        var sleep, data, config, response, config2, check, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 7, , 8]);
+                    sleep = function (ms) { return new Promise(function (resolve) { return setTimeout(resolve, ms); }); };
+                    data = JSON.stringify({
+                        prompt: 'make a song about lebron r&b',
+                        style: 'r&b',
+                        title: 'the king',
+                        customMode: true,
+                        instrumental: false,
+                        model: 'V3_5',
+                        callBackUrl: 'https://7680-134-139-201-5.ngrok-free.app',
+                    });
+                    config = {
+                        method: 'post',
+                        maxBodyLength: Infinity,
+                        url: 'https://apibox.erweima.ai/api/v1/generate',
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
-                            'Authorization': "Bearer ".concat(process.env.SONG_API_KEY),
+                            'Authorization': "Bearer a38e5c601a9a3e6a5a5e96dca16e2020",
                         },
-                    })];
-            case 2:
-                response = _b.sent();
-                // Check if the response is successful (status code 200)
-                if (response.status === 200) {
-                    console.log("API Response:", response.data); // Log the full response for debugging
-                    _a = response.data, code = _a.code, responseData = _a.data;
-                    if (code === 200 && responseData && responseData.data) {
-                        taskId = responseData.data[0].task_id;
-                        durationSong = responseData.data[0].duration;
-                        audioUrl = responseData.data[0].source_audio_url;
-                        imageUrl = responseData.data[0].image;
-                        return [2 /*return*/, {
-                                text: "".concat(Genre, " song about ").concat(Prompt, " that is ").concat(durationSong, " seconds long."),
-                                data: {
-                                    duration: durationSong,
-                                    audio: audioUrl,
-                                },
-                                imageUrl: imageUrl,
-                            }];
-                    }
-                    else {
-                        throw new Error("Invalid data structure received.");
-                    }
-                }
-                else {
-                    throw new Error("API returned an error: ".concat(response.status, " ").concat(response.statusText));
-                }
-                return [3 /*break*/, 4];
-            case 3:
-                error_1 = _b.sent();
-                console.error("Error while generating the song:", error_1);
-                return [2 /*return*/, {
-                        text: "Failed to generate song.",
-                        data: null,
-                        imageUrl: null,
-                    }];
-            case 4: return [2 /*return*/];
-        }
+                        data: data,
+                    };
+                    return [4 /*yield*/, axios_1.default.request(config)];
+                case 1:
+                    response = _a.sent();
+                    config2 = {
+                        method: 'get',
+                        maxBodyLength: Infinity,
+                        url: 'https://apibox.erweima.ai/api/v1/generate/record-info',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Authorization': 'Bearer a38e5c601a9a3e6a5a5e96dca16e2020'
+                        },
+                        params: {
+                            taskId: response.data.data.taskId
+                        }
+                    };
+                    console.log(response.data.data.taskId);
+                    return [4 /*yield*/, axios_1.default.request(config2)];
+                case 2:
+                    check = _a.sent();
+                    _a.label = 3;
+                case 3:
+                    if (!(check.data.data.status != 'SUCCESS')) return [3 /*break*/, 6];
+                    console.log('Response Data:', check.data.data.status);
+                    return [4 /*yield*/, sleep(10000)];
+                case 4:
+                    _a.sent();
+                    return [4 /*yield*/, axios_1.default.request(config2)];
+                case 5:
+                    check = _a.sent();
+                    return [3 /*break*/, 3];
+                case 6:
+                    console.log(response);
+                    console.log('Suno API Response:', response.data);
+                    return [3 /*break*/, 8];
+                case 7:
+                    error_1 = _a.sent();
+                    console.error('Error calling Suno API:', error_1.response ? error_1.response.data : error_1.message);
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
+            }
+        });
     });
-}); };
-// Example usage for testing
-var testGenerateSong = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var result;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, generateSong("lebron james rnb", "rnb", "My King")];
-            case 1:
-                result = _a.sent();
-                if (result.data) {
-                    console.log("Song generated successfully:", result);
-                }
-                else {
-                    console.log("Failed to generate song:", result.text);
-                }
-                return [2 /*return*/];
-        }
-    });
-}); };
-// Call the test function
-testGenerateSong();
+}
+// Call the function
+generateSong();
