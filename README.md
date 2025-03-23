@@ -25,6 +25,7 @@ Once you have installed the dependencies, follow these steps:
 
 ### 1. Clone the repository:
     git clone https://github.com/mawerb/DainButterflyDJ.git
+    npm ci
 
 ### 2. Navigate to the `src` directory:
     cd src
