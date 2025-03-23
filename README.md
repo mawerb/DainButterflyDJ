@@ -12,10 +12,15 @@ npm install -g @dainprotocol/cli
 ## Setup
 Once you have installed dependencies, from the src directory open three separate terminals and type the following commands in order:
 ```bash
+git clone https://github.com/mawerb/DainButterflyDJ.git
+```
+```bash
+cd src
 node server.js
 ```
 
 ```bash
+cd src
 nkrog http 3000
 ```
 This will create a publicly accessible version of your localhost server. 
