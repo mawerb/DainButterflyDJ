@@ -1,45 +1,65 @@
-# Getting Started
+# Getting Started with DainAI
 
-This DainAI tool allows users to be able to easily create songs based off prompts they provide to the agent.
+This DainAI tool allows users to easily create songs based on prompts they provide to the agent.
 
 ## Installation
-Use the package manager [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install DAIN CLI.
 
-```bash
-npm install -g @dainprotocol/cli
-```
+1. **Install DAIN CLI** using the package manager [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+
+    ```bash
+    npm install -g @dainprotocol/cli
+    ```
+
+2. **Install ngrok** using the package manager [brew](https://docs.brew.sh/Installation):
+
+    ```bash
+    brew install ngrok
+    ```
 
 ## Setup
-Once you have installed dependencies, from the src directory open three separate terminals and type the following commands in order:
-```bash
-git clone https://github.com/mawerb/DainButterflyDJ.git
-```
-Once in the project's directory
-```bash
-cd src
-node server.js
-```
 
-```bash
-cd src
-nkrog http 3000
-```
-This will create a publicly accessible version of your localhost server. 
-Copy the new URL route and DainAPI/SUNO key onto your .env by running the following code on your terminal 
-```bash
-export ROUTE=<NEW_ROUTE>
-```
-example for <NEW_ROUTE>: https://1dd2-134-139-201-5.ngrok-free.app
-```bash
-export DAIN_API_KEY=<DAIN_API_KEY>
-```
-```bash
-export SONG_API_KEY=<SUNO_API_KEY>
-```
-Lastly, run the command and paste the link into Dain's Service URL input box
-```bash
-npm run dev
-```
+Once you have installed the dependencies, follow these steps:
 
+1. Clone the repository:
 
+    ```bash
+    git clone https://github.com/mawerb/DainButterflyDJ.git
+    ```
 
+2. Navigate to the `src` directory:
+
+    ```bash
+    cd src
+    ```
+
+3. **Start the server** by running:
+
+    ```bash
+    node server.js
+    ```
+
+4. In a separate terminal window, run **ngrok** in the `src` directory to expose your local server:
+
+    ```bash
+    ngrok http 3000
+    ```
+
+    This will generate a publicly accessible URL. Copy this URL.
+
+5. **Set environment variables** by adding the following in your terminal:
+
+    ```bash
+    export ROUTE=<NEW_ROUTE>
+    export DAIN_API_KEY=<DAIN_API_KEY>
+    export SONG_API_KEY=<SUNO_API_KEY>
+    ```
+
+    Replace `<NEW_ROUTE>`, `<DAIN_API_KEY>`, and `<SUNO_API_KEY>` with the appropriate values.
+
+6. Lastly, start the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    Paste the URL you copied earlier into Dain's Service URL input box and get creative with your song prompts!
